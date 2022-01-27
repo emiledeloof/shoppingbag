@@ -1,0 +1,12 @@
+[
+    {
+        "name": "Choco",
+        "quantity": "3 potten",
+        "comment": "dit is een opmerking"
+    },
+    {
+        "name": "nutella",
+        "quantity": "2 potten",
+        "comment": "dit is een opmerking"
+    }
+]

@@ -5,3 +5,19 @@ body{
     color: white;
     font-family: Arial, Helvetica, sans-serif;
 }
+
+body a{
+    color: white;
+}
+
+.container{
+    margin-left: 15px; 
+}
+
+.articles{
+    border: white 1px solid;
+    padding: 15px;
+    width: 50%;
+    margin-top: 20px;
+    border-radius: 20px;
+}
