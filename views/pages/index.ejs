@@ -12,10 +12,21 @@
         <h1>Shopping Bag</h1>
         <a href="pages/new">Artikel Toevoegen</a>
         <a href="pages/settings">Instellingen</a>
+        <select name="filter" id="filter">
+            <option value="all">Alles</option>
+            <% stores.forEach(store => { %>
+                <option value="<%= store.store %>"><%= store.store %></option>
+            <% }) %>
+        </select>
         <% articles.forEach(article => { %>
             <div class="articles">
-                <h2><%= article.name %></h2>
-                <h4><%= article.quantity %></h4>
+                <a href="pages/<%= article.id %>">
+                    <h2><%= article.name %></h2>
+                    <h4><%= article.quantity %>, <%= article.requestedBy %>, <%= article.store %></h4>
+                </a>
+                <form action="pages/<%=article.id%>?_method=DELETE" method="POST">
+                    <button id="deleteButton" class="button">delete</button>
+                </form>
             </div>
         <% }) %>
     </div>

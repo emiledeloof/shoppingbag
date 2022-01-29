@@ -10,9 +10,16 @@
 <body>
     <h1>new</h1>
     <form action="./new" method="POST">
-        <input type="text" placeholder="Artikel" class="inputs" id="article" name="article">
-        <input type="text" placeholder="Hoeveelheid" class="inputs" id="quantity" name="quantity">
+        <input type="text" placeholder="Artikel" class="inputs" id="article" name="article" required>
+        <input type="text" placeholder="Hoeveelheid" class="inputs" id="quantity" name="quantity" required>
         <input type="text" placeholder="Opmerkingen" class="inputs" id="comment" name="comment">
+        <input type="text" placeholder="Voor (bv: Thuis, Bruno)" class="inputs" id="requestedBy" name="requestedBy" required>
+        <label for="winkel">Winkel: </label>
+        <select name="store" id="store">
+            <% stores.forEach(store => { %>
+                <option value="<%= store.store %>"><%= store.store %></option>
+            <% }) %>
+        </select>
         <input type="submit">
     </form>
 </body>

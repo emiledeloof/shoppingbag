@@ -4,12 +4,14 @@ const app = express();
 const PORT = 5001
 const router = require("./routes/router")
 const fs = require("fs")
+const methodOverride = require("method-override")
 
 // set ejs as view engine
 app.set("view engine", "ejs");
 
 app.use(express.urlencoded({extended: false}))
 app.use(express.static("styling")); // styling folder static so i can link to style.css
+app.use(methodOverride("_method"))
 
 // render index file
 app.get("/", (req, res) => {

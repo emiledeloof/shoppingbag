@@ -1,12 +1,10 @@
 [
     {
+        "id": 55918303,
         "name": "Choco",
-        "quantity": "3 potten",
-        "comment": "dit is een opmerking"
-    },
-    {
-        "name": "nutella",
         "quantity": "2 potten",
-        "comment": "dit is een opmerking"
+        "comment": "",
+        "requestedBy": "Thuis",
+        "store": "testStore"
     }
 ]
