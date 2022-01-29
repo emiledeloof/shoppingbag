@@ -8,9 +8,13 @@
         <link rel="stylesheet" href="../style.css">
     </head>
     <body>
+        <br><a href="/">Home</a> <br><br>
         <%- include("newStore.ejs") %>
         <% stores.forEach(store => { %>
             <h2><%= store.store %></h2>
+            <form action="./deleteStore/<%= store.store %>?_method=DELETE" method="POST">
+                <button>delete</button>
+            </form>
         <% }) %>
     </body>
 </html>

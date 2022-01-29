@@ -1,10 +1,18 @@
 [
     {
-        "id": 55918303,
+        "id": 22579481,
         "name": "Choco",
         "quantity": "2 potten",
         "comment": "",
         "requestedBy": "Thuis",
-        "store": "testStore"
+        "store": "Colruyt"
+    },
+    {
+        "id": 86168337,
+        "name": "storeTest",
+        "quantity": "2 potten",
+        "comment": "opm",
+        "requestedBy": "Thuis",
+        "store": "Delhaize "
     }
 ]

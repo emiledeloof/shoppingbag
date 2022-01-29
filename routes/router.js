@@ -39,7 +39,7 @@ router.post("/new", (req, res) => {
         fs.writeFileSync("./database/articles.json", parsedData, (e) => {   //write to the database file
             if(e) throw e;
         });
-        res.redirect("./confirm");  // if complete redirect to confirm
+        res.redirect("/");  // if complete redirect to confirm
         isUnique = true
     } else{
         console.log("is unique is false");
@@ -58,31 +58,16 @@ router.post("/newStore", (req, res) => {
         fs.writeFileSync("./database/stores.json", parsedData, (e) => {   //write to the database file
             if(e) throw e;
         });
-        res.redirect("./confirm");  // if complete redirect to confirm
+        res.redirect("./settings");  // if complete redirect to confirm
         isUnique = true
     } else{
         console.log("is unique is false");
     }
 });
 
-router.get("/confirm", (req, res) => {
-    res.render("pages/confirm");
-});
-
 router.get("/settings", (req, res) => {
     res.render("pages/settings", {stores: parsedStores})
 });
-
-router.get("/:id", (req, res) => {
-    var requestedArticle
-    var convertedId = parseInt(req.params.id)
-    parsedArticles.forEach(article => {
-        if(article.id === convertedId){
-            requestedArticle = article
-        }
-    })
-    res.render("pages/show", {article: requestedArticle})
-})
 
 router.delete("/:id", (req, res) => {
     var convertedId = parseInt(req.params.id);              
@@ -99,6 +84,37 @@ router.delete("/:id", (req, res) => {
         }
     })
     res.redirect("/")
+})
+
+router.delete("/deleteStore/:store", (req, res) => {
+    parsedStores.forEach(store => {
+        if(store.store === req.params.store){
+            const index = parsedStores.indexOf(store)
+            if(index > -1){
+                parsedStores.splice(index, 1)
+                let parsedData = JSON.stringify(parsedStores, null, 4);
+                fs.writeFileSync("./database/stores.json", parsedData, (e) => {
+                    if(e) throw e;
+                })
+            }
+        }
+    })
+    res.redirect("./../settings")
+})
+
+router.get("/:id", (req, res) => {
+    var requestedArticle
+    var convertedId = parseInt(req.params.id)
+    parsedArticles.forEach(article => {
+        if(article.id === convertedId){
+            requestedArticle = article
+        }
+    })
+    res.render("pages/show", {article: requestedArticle})
+})
+
+router.post("/done", (req, res) => {
+    
 })
 
 function generateId(){
