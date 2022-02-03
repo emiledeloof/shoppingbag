@@ -1,0 +1,11 @@
+<input type="text" placeholder="Artikel" class="inputs" id="article" name="article" value="<%= article.name %>" required>
+<input type="text" placeholder="Hoeveelheid" class="inputs" id="quantity" name="quantity" value="<%= article.quantity %>" required>
+<input type="text" placeholder="Opmerkingen" class="inputs" id="comment" name="comment" value="<%= article.comment %>">
+<input type="text" placeholder="Voor (bv: Thuis, Bruno)" class="inputs" id="requestedBy" name="requestedBy" value="<%= article.requestedBy%>" required>
+<label for="winkel">Winkel: </label>
+<select name="store" id="store">
+    <% stores.forEach(store => { %>
+    <option value="<%= store.store %>"><%= store.store %></option>
+    <% }) %>
+</select>
+<input type="submit">

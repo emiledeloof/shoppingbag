@@ -11,19 +11,26 @@
 <body>
     <div class="container">
         <nav id="mainNav">
-            <a href="pages/new">Artikel Toevoegen</a>
-            <a href="pages/settings"><i class="fa-solid fa-gear"></i></a>
-            <select name="filter" id="filter" onchange="filter()">
-                <option value="all">Alles</option>
-                <% stores.forEach(store => { %>
-                    <option value="<%= store.store %>"><%= store.store %></option>
-                <% }) %>
-            </select>
-            <form action="pages/done" method="POST">
-                <button>Klaar met shoppen</button>
-            </form>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="pages/new">Artikel Toevoegen</a></li>
+                <li><a href="pages/settings"><i class="fa-solid fa-gear"></i></a></li>
+                <li>
+                    <select name="filter" id="filter" onchange="filter()">
+                        <option value="all">Alles</option>
+                        <% stores.forEach(store => { %>
+                            <option value="<%= store.store %>"><%= store.store %></option>
+                        <% }) %>
+                    </select>
+                </li>
+                <li>
+                    <form action="pages/done" method="POST">
+                        <button>Klaar met shoppen</button>
+                    </form>
+                </li>
+            </ul>
         </nav>
-        <h3 id="shoppingTitle">Shopping Bag</h3>
+        <!-- <h3 id="shoppingTitle">Shopping Bag</h3> -->
         <div class="articlesWrapper">
         <% articles.forEach(article => { %>
             <div class="articles">
@@ -31,6 +38,7 @@
                     <h2><%= article.name %></h2>
                     <h4><%= article.quantity %>, <%= article.requestedBy %>, <label class="articleStore"><%= article.store %></label></h4>
                 </a>
+                <a href="pages/edit/<%= article.id %>">Edit</a>
                 <form action="pages/<%=article.id%>?_method=DELETE" method="POST">
                     <button id="deleteButton" class="button">delete</button>
                 </form>

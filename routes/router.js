@@ -14,7 +14,7 @@ var parsedStores = JSON.parse(readStores); // parse buffer to json
 let isUnique = true;
 
 router.get("/new", (req, res) => {
-    res.render("pages/new", { stores: parsedStores})
+    res.render("pages/new", { stores: parsedStores, article: ""})
 });
 
 router.post("/new", (req, res) => {
@@ -113,8 +113,32 @@ router.get("/:id", (req, res) => {
     res.render("pages/show", {article: requestedArticle})
 })
 
-router.post("/done", (req, res) => {
-    
+router.get("/edit/:id", (req, res) => {
+    var requestedArticle
+    var convertedId = parseInt(req.params.id)
+    parsedArticles.forEach(article => {
+        if(article.id === convertedId){
+            requestedArticle = article
+        }
+    })
+    res.render("pages/edit", {article: requestedArticle, stores: parsedStores})
+})
+
+router.post("/edit/:id", (req, res) => {
+    parsedArticles.forEach(article => {
+        if(article.id === req.params.id){
+            const index = parsedStores.indexOf(store)
+            if(index > -1){
+                parsedArticles.splice(index, 1)
+                let parsedData = JSON.stringify(parsedArticles, null, 4);
+                fs.writeFileSync("./database/stores.json", parsedData, (e) => {
+                    if(e) throw e;
+                })
+            }
+            router.post("/new");
+            console.log("posted to new");
+        }
+    })
 })
 
 function generateId(){
