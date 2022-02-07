@@ -1,17 +1,9 @@
 [
     {
-        "id": 63682123,
+        "id": 76941256,
         "name": "test",
         "quantity": "3",
-        "comment": "",
-        "requestedBy": "Thuis",
-        "store": "Colruyt"
-    },
-    {
-        "id": 60626034,
-        "name": "TEST2",
-        "quantity": "4",
-        "comment": "",
+        "comment": "opmerking",
         "requestedBy": "Thuis",
         "store": "Colruyt"
     }

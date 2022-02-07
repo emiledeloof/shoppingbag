@@ -24,7 +24,7 @@ router.post("/new", (req, res) => {
     let comment = req.body.comment
     let requestedBy = req.body.requestedBy
     let store = req.body.store
-    validateName("article", generatedId)    // execute function to check if generated id is unique
+    validateId("article", generatedId)    // execute function to check if generated id is unique
     if(isUnique === true){          // check if id is unique
         const testObject = {        // create the object to be added to the database file
             id: generatedId,
@@ -48,7 +48,7 @@ router.post("/new", (req, res) => {
 
 router.post("/newStore", (req, res) => {
     let storeName = req.body.newStore // request store name from front-end
-    validateName("store", storeName)
+    validateId("store", storeName)
     if(isUnique === true){
         const testObject = {        // create the object to be added to the database file
             store: storeName
@@ -124,28 +124,40 @@ router.get("/edit/:id", (req, res) => {
     res.render("pages/edit", {article: requestedArticle, stores: parsedStores})
 })
 
-router.post("/edit/:id", (req, res) => {
-    parsedArticles.forEach(article => {
-        if(article.id === req.params.id){
-            const index = parsedStores.indexOf(store)
-            if(index > -1){
-                parsedArticles.splice(index, 1)
-                let parsedData = JSON.stringify(parsedArticles, null, 4);
-                fs.writeFileSync("./database/stores.json", parsedData, (e) => {
+router.post("/edit/:id/post", (req, res) => {
+    var convertedId = parseInt(req.params.id);              
+    parsedArticles.forEach(article => {                     // loop over each article
+        if(article.id === convertedId){
+            const index = parsedArticles.indexOf(article)   // get index of the item that needs to be delete from the array
+            console.log(article)
+            article.id = convertedId
+            article.name = req.body.article                 // request article name from front-end
+            article.quantity = req.body.quantity 
+            article.comment = req.body.comment
+            article.requestedBy = req.body.requestedBy
+            article.store = req.body.store
+            parsedArticles.push(article)
+            let string = JSON.stringify(parsedArticles, null, 4)
+            fs.writeFileSync("./database/articles.json", string, (e) => {
+                throw e
+            })
+            if(index > -1){                                 
+                parsedArticles.splice(index, 1)             // delete item from array
+                let parsedData = JSON.stringify(parsedArticles, null, 4);   // parse json buffer to string
+                fs.writeFileSync("./database/articles.json", parsedData, (e) => {   //write to the database file
                     if(e) throw e;
-                })
+                });
             }
-            router.post("/new");
-            console.log("posted to new");
         }
     })
+    res.redirect("/")
 })
 
 function generateId(){
     return Math.floor(Math.random() * 100000000) + 10000000
 }
 
-function validateName(path, name){
+function validateId(path, name){
     if(path == "article"){
         parsedArticles.forEach(article => {
             if(article.id == name){

@@ -4,6 +4,7 @@
 <input type="text" placeholder="Voor (bv: Thuis, Bruno)" class="inputs" id="requestedBy" name="requestedBy" value="<%= article.requestedBy%>" required>
 <label for="winkel">Winkel: </label>
 <select name="store" id="store">
+    <option value="/">/</option>
     <% stores.forEach(store => { %>
     <option value="<%= store.store %>"><%= store.store %></option>
     <% }) %>

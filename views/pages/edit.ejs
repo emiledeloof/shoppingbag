@@ -10,7 +10,7 @@
 <body>
     <div class="container">
         <h1>Edit <%= article.name %></h1>
-        <form action="./<%= article.id %>" method="POST">
+        <form action="./<%= article.id %>/post" method="POST">
             <%- include("_formFields.ejs") %>
         </form>
     </div>
