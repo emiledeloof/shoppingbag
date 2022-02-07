@@ -49,23 +49,19 @@
     <script>
         function filter(e){
             const li = document.querySelectorAll(".articles");
-            let articleStore = document.querySelectorAll(".articleStore")
             li.forEach(item => {
+                let articleS = item.querySelector(".articleStore");
                 switch(event.target.value){
                     case "all":
                         item.style.display = "";
                         break;
                     // <% stores.forEach(store => { %>
                     case "<%= store.store %>":
-                        articleStore.forEach(articleS => {
-                            if(articleS.innerText === "<%= store.store %>"){
-                                console.log("valid")
-                                item.style.display = ""
-                            } else{
-                                console.log("not valid")
-                                item.style.display = "none"
-                            }
-                        })
+                        if(articleS.innerText === "<%= store.store %>"){
+                            item.style.display = ""
+                        } else{
+                            item.style.display = "none"
+                        }
                         break;
                     // <% }) %>
                 }

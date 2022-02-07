@@ -129,16 +129,15 @@ router.post("/edit/:id/post", (req, res) => {
     parsedArticles.forEach(article => {                     // loop over each article
         if(article.id === convertedId){
             const index = parsedArticles.indexOf(article)   // get index of the item that needs to be delete from the array
-            console.log(article)
             article.id = convertedId
             article.name = req.body.article                 // request article name from front-end
             article.quantity = req.body.quantity 
             article.comment = req.body.comment
             article.requestedBy = req.body.requestedBy
             article.store = req.body.store
-            parsedArticles.push(article)
-            let string = JSON.stringify(parsedArticles, null, 4)
-            fs.writeFileSync("./database/articles.json", string, (e) => {
+            parsedArticles.push(article)                    // push new article into the parsedArticle array
+            let string = JSON.stringify(parsedArticles, null, 4)    // parse json buffer to string
+            fs.writeFileSync("./database/articles.json", string, (e) => {       // write to db file
                 throw e
             })
             if(index > -1){                                 
