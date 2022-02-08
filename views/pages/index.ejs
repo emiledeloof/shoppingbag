@@ -13,24 +13,23 @@
         <nav id="mainNav">
             <ul>
                 <li><a href="/">Home</a></li>
-                <li><a href="pages/new">Artikel Toevoegen</a></li>
-                <li><a href="pages/settings"><i class="fa-solid fa-gear"></i></a></li>
-                <li>
-                    <select name="filter" id="filter" onchange="filter()">
-                        <option value="all">Alles</option>
-                        <% stores.forEach(store => { %>
-                            <option value="<%= store.store %>"><%= store.store %></option>
-                        <% }) %>
-                    </select>
-                </li>
+                <li><a href="pages/new"><i class="fa-solid fa-circle-plus"></i> Nieuw</a></li>
                 <li>
                     <form action="pages/done" method="POST">
-                        <button>Klaar met shoppen</button>
+                        <select name="filter" id="filter">
+                            <option value="all">Alles</option>
+                            <% stores.forEach(store => { %>
+                                <option value="<%= store.store %>"><%= store.store %></option>
+                                <% }) %>
+                        </select>
+                        <button><i class="fa-solid fa-circle-check"></i> Klaar</button>
                     </form>
                 </li>
+                <li><a href="pages/settings"><i class="fa-solid fa-gear"></i></a></li>
             </ul>
         </nav>
-        <!-- <h3 id="shoppingTitle">Shopping Bag</h3> -->
+        <hr color="black" width="90%" size="0.5px">
+        <h3 id="shoppingTitle">Shopping Bag</h3>
         <div class="articlesWrapper">
         <% articles.forEach(article => { %>
             <div class="articles">
@@ -38,23 +37,30 @@
                     <h2><%= article.name %></h2>
                     <h4><%= article.quantity %>, <%= article.requestedBy %>, <label class="articleStore"><%= article.store %></label></h4>
                 </a>
-                <a href="pages/edit/<%= article.id %>">Edit</a>
+                <a href="pages/edit/<%= article.id %>"><i class="fa-solid fa-pen-to-square"></i></a>
                 <form action="pages/<%=article.id%>?_method=DELETE" method="POST">
-                    <button id="deleteButton" class="button">delete</button>
+                    <button id="deleteButton" class="button"><i class="fa-solid fa-trash-can"></i></button>
                 </form>
             </div>
         <% }) %>
         </div>
     </div>
     <script>
-        function filter(e){
+        document.addEventListener("change", () => {
+            let filter = document.getElementById("filter").value;
             const li = document.querySelectorAll(".articles");
             li.forEach(item => {
                 let articleS = item.querySelector(".articleStore");
-                switch(event.target.value){
+                switch(filter){
                     case "all":
                         item.style.display = "";
                         break;
+                    case "/":
+                        if(articleS.innerText === "/"){
+                            item.style.display = ""
+                        } else{
+                            item.style.display = "none"
+                        }
                     // <% stores.forEach(store => { %>
                     case "<%= store.store %>":
                         if(articleS.innerText === "<%= store.store %>"){
@@ -66,7 +72,7 @@
                     // <% }) %>
                 }
             })
-        }
+        })
     </script>
 </body>
 </html>

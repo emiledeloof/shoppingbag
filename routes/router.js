@@ -152,6 +152,23 @@ router.post("/edit/:id/post", (req, res) => {
     res.redirect("/")
 })
 
+router.post("/done", (req, res) => {
+    let filter = req.body.filter
+    parsedArticles.forEach(article => {
+        if(article.store === filter){
+            const index = parsedArticles.indexOf(article);
+            if(index > -1){
+                parsedArticles.splice(index, 1);
+                let parsedData = JSON.stringify(parsedArticles)
+                fs.writeFileSync("./database/articles.json", parsedData, (e) => {
+                    if(e) throw e;
+                })
+            }
+        }
+    })
+    res.redirect("/")
+})
+
 function generateId(){
     return Math.floor(Math.random() * 100000000) + 10000000
 }
