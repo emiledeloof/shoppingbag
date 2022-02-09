@@ -6,15 +6,37 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Instellingen</title>
         <link rel="stylesheet" href="../style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     </head>
     <body>
-        <br><a href="/">Home</a> <br><br>
-        <%- include("newStore.ejs") %>
-        <% stores.forEach(store => { %>
-            <h2><%= store.store %></h2>
-            <form action="./deleteStore/<%= store.store %>?_method=DELETE" method="POST">
-                <button>delete</button>
-            </form>
-        <% }) %>
+        <div class="container">
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="./new"><i class="fa-solid fa-circle-plus"></i> Nieuw</a></li>
+                    <li><a href="./settings"><i class="fa-solid fa-gear"></i></a></li>
+                </ul>
+            </nav>
+            <hr color="black" width="90%" size="0.3px">
+            <div id="shoppingTitleWrapper">
+                <h3 id="shoppingTitle">Instellingen</h3>
+            </div>
+            <div class="articlesWrapper">
+                <div class="wrapper2">
+                    <%- include("newStore.ejs") %>
+                    <h3>Winkels:</h3>
+                    <% stores.forEach(store => { %>
+                        <div id="actionButtonWrapper" style="margin-bottom: 15px;">
+                            <label id="editButtonWrapper" style="font-size: 18px;"><%= store.store %> </label>
+                            <div id="deleteFormWrapper">    
+                                <form action="./deleteStore/<%= store.store %>?_method=DELETE" method="POST">
+                                    <button id="deleteButton"><i class="fa-solid fa-trash-can" style="font-size: 20px;"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    <% }) %>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

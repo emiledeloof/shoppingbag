@@ -159,7 +159,7 @@ router.post("/done", (req, res) => {
             const index = parsedArticles.indexOf(article);
             if(index > -1){
                 parsedArticles.splice(index, 1);
-                let parsedData = JSON.stringify(parsedArticles)
+                let parsedData = JSON.stringify(parsedArticles, null, 4)
                 fs.writeFileSync("./database/articles.json", parsedData, (e) => {
                     if(e) throw e;
                 })

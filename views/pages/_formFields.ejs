@@ -1,12 +1,16 @@
-<input type="text" placeholder="Artikel" class="inputs" id="article" name="article" value="<%= article.name %>" required>
-<input type="text" placeholder="Hoeveelheid" class="inputs" id="quantity" name="quantity" value="<%= article.quantity %>" required>
-<input type="text" placeholder="Opmerkingen" class="inputs" id="comment" name="comment" value="<%= article.comment %>">
-<input type="text" placeholder="Voor (bv: Thuis, Bruno)" class="inputs" id="requestedBy" name="requestedBy" value="<%= article.requestedBy%>" required>
-<label for="winkel">Winkel: </label>
-<select name="store" id="store">
+<label for="article" class="animation">Artikel:</label><br>
+<input type="text" class="inputs" id="article" name="article" value="<%= article.name %>" required><br>
+<label for="quantity" class="animation">Hoeveelheid:</label><br>
+<input type="text" class="inputs" id="quantity" name="quantity" value="<%= article.quantity %>" required><br>
+<label for="requestedBy" class="animation">Voor: </label><br>
+<input type="text" placeholder="(bv: Thuis, Bruno, ...)" class="inputs" id="requestedBy" name="requestedBy" value="<%= article.requestedBy%>" required><br>
+<label for="comment" class="animation">Opmerking:</label><br>
+<input type="text" class="inputs" id="comment" name="comment" value="<%= article.comment %>"><br>
+<label for="winkel" class="animation">Winkel: </label><br>
+<select name="store" id="store" class="inputs">
     <option value="/">/</option>
     <% stores.forEach(store => { %>
     <option value="<%= store.store %>"><%= store.store %></option>
     <% }) %>
 </select>
-<input type="submit">
+<br><input type="submit" id="submitButton" class="inputs">
