@@ -37,8 +37,7 @@
         <% articles.forEach(article => { %>
             <div class="articles">
                 <a href="pages/<%= article.id %>">
-                    <h2><%= article.name %></h2>
-                    <h4><%= article.quantity %>, <%= article.requestedBy %>, <label class="articleStore"><%= article.store %></label></h4>
+                    <h3><%= article.name %>, <%= article.quantity %>, <%= article.requestedBy %>, <label class="articleStore"><%= article.store %></label></h3>
                 </a>
                 <div id="actionButtonWrapper">
                     <div id="editButtonWrapper">
